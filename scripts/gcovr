@@ -748,7 +748,7 @@ def process_datafile(filename, covdata, options):
                 break
 
     cmd = [
-        options.gcov_cmd, abs_filename,
+        options.gcov_cmd, options.gcov_opts, abs_filename,
         "--branch-counts", "--branch-probabilities", "--preserve-paths",
         '--object-directory', dirname
     ]
@@ -2059,6 +2059,13 @@ parser.add_option(
     action="store",
     dest="gcov_cmd",
     default=os.environ.get('GCOV', 'gcov')
+)
+parser.add_option(
+    "--gcov-options",
+    help="Defines additional options to the gcov executable.",
+    action="store",
+    dest="gcov_opts",
+    default=''
 )
 parser.add_option(
     "--exclude-unreachable-branches",
